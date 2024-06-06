@@ -1,6 +1,7 @@
 // import the pets array from data.js
 const pets = require('./data');
 
+
 // init express app
 const express = require('express');
 const app = express();
@@ -20,6 +21,8 @@ app.get('/api', (req, res) => {
 
 // get all pets from the database
 app.get('/api/v1/pets', (req, res) => {
+    res.send([pets]);
+    
     // send the pets array as a response
 
 });
@@ -27,18 +30,29 @@ app.get('/api/v1/pets', (req, res) => {
 // get pet by owner with query string
 app.get('/api/v1/pets/owner', (req, res) => {
     // get the owner from the request
+    const owner= req.query.owner;
+    console.log(req.query);
+
+    res.send(`The pets owner is ${owner}`);
+    
+    
 
 
     // find the pet in the pets array
     const pet = pets.find(pet => pet.owner === owner);
 
     // send the pet as a response
+    res.send(`The pet is ${pet}`);
 
 });
 
 // get pet by name
 app.get('/api/v1/pets/:name', (req, res) => {
     // get the name from the request
+    const name= req.params.name;
+    res.send(`Your pet's name is ${name}`);
+
+
 
 
     // find the pet in the pets array
